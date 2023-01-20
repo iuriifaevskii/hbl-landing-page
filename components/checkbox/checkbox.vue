@@ -12,7 +12,7 @@ export default defineComponent({
     onChange(event: Event) {
       this.checkedState = (event.target as HTMLInputElement).checked;
 
-      this.$emit("updateChecked", this.checkedState);
+      this.$emit("updateChecked", { checked: this.checkedState });
     },
   },
   data() {
