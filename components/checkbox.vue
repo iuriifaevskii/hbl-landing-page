@@ -1,23 +1,31 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import type { PropType } from "vue";
+import { ChackBoxValues } from "../types/checkbox";
 
 export default defineComponent({
   name: "CheckBox",
   props: {
-    isChecked: { type: Boolean, required: true },
-    title: { type: String, required: true },
+    values: {
+      type: Object as PropType<ChackBoxValues>,
+      required: true,
+    },
   },
   emits: ["updateChecked"],
   methods: {
     onChange(event: Event) {
       this.checkedState = (event.target as HTMLInputElement).checked;
 
-      this.$emit("updateChecked", { checked: this.checkedState });
+      this.$emit("updateChecked", {
+        checked: this.checkedState,
+        value: this.values.value,
+        title: this.values.title,
+      });
     },
   },
   data() {
     return {
-      checkedState: this.isChecked,
+      checkedState: this.values.checked,
     };
   },
 });
@@ -28,11 +36,11 @@ export default defineComponent({
     <input
       type="checkbox"
       @change="onChange"
-      :id="title"
-      :name="title"
+      :id="values.title"
+      :name="values.title"
       :checked="checkedState"
     />
-    {{ title }}
+    {{ values.title }}
   </div>
 </template>
 

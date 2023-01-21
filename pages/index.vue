@@ -1,22 +1,43 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import CheckBox from "../components/checkbox/checkbox.vue";
 import { NuxtLink } from "#components";
+import CheckBoxGroup from "../components/checkbox-group.vue";
+import { ChackBoxValues } from "../types/checkbox";
 
 export default defineComponent({
   components: {
-    CheckBox,
+    CheckBoxGroup,
   },
   data() {
     return {
-      checked: false,
-      title: "item 1",
+      items: [
+        {
+          checked: false,
+          value: "item---1",
+          title: "item 1",
+        },
+        {
+          checked: false,
+          value: "item---2",
+          title: "item 2",
+        },
+        {
+          checked: true,
+          value: "item---3",
+          title: "item 3",
+        },
+        {
+          checked: true,
+          value: "item---4",
+          title: "item 4",
+        },
+      ],
     };
   },
   methods: {
-    updateChecked(payload: { checked: boolean }) {
-      this.checked = payload.checked;
+    updateItems(items: ChackBoxValues[]) {
+      this.items = items.map((el) => ({ ...el }));
     },
   },
 });
@@ -25,11 +46,9 @@ export default defineComponent({
 <template>
   <div>
     <NuxtLink to="/privacy-policy">Privacy Policy</NuxtLink>
-    <CheckBox
-      :isChecked="checked"
-      :title="title"
-      @updateChecked="updateChecked"
-    />
-    <div>checked: {{ checked }}</div>
+    <CheckBoxGroup :items="items" @updateItems="updateItems" />
+    <div v-for="el in items">
+      <div>{{ JSON.stringify(el) }}</div>
+    </div>
   </div>
 </template>
