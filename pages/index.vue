@@ -3,11 +3,13 @@ import { defineComponent } from "vue";
 
 import { NuxtLink } from "#components";
 import CheckBoxGroup from "../components/checkbox-group.vue";
+import Counter from "../components/counter.vue";
 import { ChackBoxValues } from "../types/checkbox";
 
 export default defineComponent({
   components: {
     CheckBoxGroup,
+    Counter,
   },
   data() {
     return {
@@ -50,5 +52,6 @@ export default defineComponent({
     <div v-for="el in items">
       <div>{{ JSON.stringify(el) }}</div>
     </div>
+    <Counter />
   </div>
 </template>
