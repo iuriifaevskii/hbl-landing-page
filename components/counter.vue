@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, computed, watch, onMounted } from "vue";
+import { vAutofocus } from "../directives/vAutofocus";
 
 const simpleTitle = "Not reactive title";
 
@@ -40,12 +41,6 @@ const decrement = (amount: number): void => {
 onMounted(() => {
   console.log("onMounted - counter");
 });
-
-const vAutofocus = {
-  mounted: (el: HTMLElement) => {
-    el.focus();
-  },
-};
 </script>
 
 <template>
