@@ -1,17 +1,5 @@
 <script setup lang="ts">
-import {
-  reactive,
-  computed,
-  watch,
-  onBeforeMount,
-  onMounted,
-  onBeforeUnmount,
-  onUnmounted,
-  onActivated,
-  onDeactivated,
-  onBeforeUpdate,
-  onUpdated,
-} from "vue";
+import { reactive, computed, watch, onMounted } from "vue";
 
 const simpleTitle = "Not reactive title";
 
@@ -53,37 +41,11 @@ onMounted(() => {
   console.log("onMounted - counter");
 });
 
-// onBeforeMount(() => {
-//   console.log("onBeforeMount");
-// });
-
-// onMounted(() => {
-//   console.log("onMounted");
-// });
-
-// onBeforeUnmount(() => {
-//   console.log("onBeforeUnmount");
-// });
-
-// onUnmounted(() => {
-//   console.log("onUnmounted");
-// });
-
-// onActivated(() => {
-//   console.log("onActivated");
-// });
-
-// onDeactivated(() => {
-//   console.log("onDeactivated");
-// });
-
-// onBeforeUpdate(() => {
-//   console.log("onBeforeUpdate");
-// });
-
-// onUpdated(() => {
-//   console.log("onUpdated");
-// });
+const vAutofocus = {
+  mounted: (el: HTMLElement) => {
+    el.focus();
+  },
+};
 </script>
 
 <template>
@@ -99,7 +61,7 @@ onMounted(() => {
       <p>enen or odd: {{ evenOrEven }}</p>
     </div>
     <div>
-      <input type="text" v-model="counter.counterTitle" />
+      <input v-autofocus type="text" v-model="counter.counterTitle" />
     </div>
   </div>
 </template>
