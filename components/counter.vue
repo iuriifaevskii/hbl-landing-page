@@ -1,7 +1,23 @@
 <script setup lang="ts">
-import { reactive, computed, watch } from "vue";
+import {
+  reactive,
+  computed,
+  watch,
+  onBeforeMount,
+  onMounted,
+  onBeforeUnmount,
+  onUnmounted,
+  onActivated,
+  onDeactivated,
+  onBeforeUpdate,
+  onUpdated,
+} from "vue";
 
 const simpleTitle = "Not reactive title";
+
+onMounted(() => {
+  console.log("onMounted - title");
+});
 
 const counter = reactive({ count: 0, counterTitle: "My computer reactive" });
 
@@ -32,6 +48,42 @@ const increment = (amount: number, amount2?: number, e?: Event): void => {
 const decrement = (amount: number): void => {
   counter.count -= amount;
 };
+
+onMounted(() => {
+  console.log("onMounted - counter");
+});
+
+// onBeforeMount(() => {
+//   console.log("onBeforeMount");
+// });
+
+// onMounted(() => {
+//   console.log("onMounted");
+// });
+
+// onBeforeUnmount(() => {
+//   console.log("onBeforeUnmount");
+// });
+
+// onUnmounted(() => {
+//   console.log("onUnmounted");
+// });
+
+// onActivated(() => {
+//   console.log("onActivated");
+// });
+
+// onDeactivated(() => {
+//   console.log("onDeactivated");
+// });
+
+// onBeforeUpdate(() => {
+//   console.log("onBeforeUpdate");
+// });
+
+// onUpdated(() => {
+//   console.log("onUpdated");
+// });
 </script>
 
 <template>
