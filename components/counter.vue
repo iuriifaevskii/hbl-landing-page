@@ -1,26 +1,28 @@
 <script setup>
-import { ref } from "vue";
+import { reactive } from "vue";
 
-const count = ref(0);
-const counterTitle = ref("My counter");
+const simpleTitle = "Not reactive title";
+
+const counter = reactive({ count: 0, counterTitle: "My computer reactive" });
 
 const increment = () => {
-  count.value++;
+  counter.count++;
 };
 
 const decrement = () => {
-  count.value--;
+  counter.count--;
 };
 </script>
 
 <template>
   <div>
-    <h1>{{ counterTitle }}</h1>
+    <h1>{{ counter.counterTitle }}</h1>
+    <h2>{{ simpleTitle }}</h2>
     <button @click="increment">+</button>
-    {{ count }}
+    {{ counter.count }}
     <button @click="decrement">-</button>
     <div>
-      <input type="text" v-model="counterTitle" />
+      <input type="text" v-model="counter.counterTitle" />
     </div>
   </div>
 </template>
