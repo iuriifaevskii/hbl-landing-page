@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { reactive, computed, watch, onMounted } from "vue";
+import { reactive, computed, watch, onMounted, ref, nextTick } from "vue";
 import { vAutofocus } from "../directives/vAutofocus";
+import type { Ref } from "vue";
 
 const simpleTitle = "Not reactive title";
+
+const headerRef: Ref<HTMLElement | null> = ref(null);
 
 onMounted(() => {
   console.log("onMounted - title");
@@ -34,18 +37,21 @@ const increment = (amount: number, amount2?: number, e?: Event): void => {
   counter.count += amount;
 };
 
-const decrement = (amount: number): void => {
+const decrement = async (amount: number): Promise<void> => {
   counter.count -= amount;
+  await nextTick(() => {
+    console.log("next tick");
+  });
 };
 
 onMounted(() => {
-  console.log("onMounted - counter");
+  console.log("onMounted - counter", headerRef);
 });
 </script>
 
 <template>
   <div>
-    <h1>{{ counter.counterTitle }}</h1>
+    <h1 ref="headerRef">{{ counter.counterTitle }}</h1>
     <h2>{{ simpleTitle }}</h2>
     <button @click="increment(2, 3, $event)">+2</button>
     <button @click="increment(1)">+</button>

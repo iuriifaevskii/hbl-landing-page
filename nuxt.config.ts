@@ -11,4 +11,5 @@ export default defineNuxtConfig({
   build: {
     transpile: ["primevue"],
   },
+  modules: ["@vueuse/nuxt"],
 });

@@ -1,17 +1,20 @@
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { reactive, Ref, ref } from "vue";
 
 import { NuxtLink } from "#components";
 import CheckBoxGroup from "../components/checkbox-group.vue";
 import Counter from "../components/counter.vue";
+import Modal from "../components/modal.vue";
+
 import { ChackBoxValues } from "../types/checkbox";
+import { useModal } from "../use/useModal";
 
 interface StateData {
-  items: ChackBoxValues[];
+  data: ChackBoxValues[];
 }
 
 const state: StateData = reactive({
-  items: [
+  data: [
     {
       checked: false,
       value: "item---1",
@@ -36,17 +39,25 @@ const state: StateData = reactive({
 });
 
 const updateItems = (items: ChackBoxValues[]): void => {
-  state.items = items.map((el) => ({ ...el }));
+  state.data = items.map((el) => ({ ...el }));
 };
+
+const { isOpened, setIsOpened } = useModal();
 </script>
 
 <template>
   <div>
     <NuxtLink to="/privacy-policy">Privacy Policy</NuxtLink>
-    <CheckBoxGroup :items="state.items" @updateItems="updateItems" />
-    <div v-for="el in state.items">
+    <CheckBoxGroup :items="state.data" @updateItems="updateItems" />
+    <div v-for="el in state.data">
       <div>{{ JSON.stringify(el) }}</div>
     </div>
     <Counter />
+    <button @click="setIsOpened(true)">Open Modal</button>
+    <Modal :isOpened="isOpened" @setIsOpened="setIsOpened">
+      <template v-slot:header>Header</template>
+      <template v-slot:body>Body</template>
+      <template v-slot:footer>Footer</template>
+    </Modal>
   </div>
 </template>
