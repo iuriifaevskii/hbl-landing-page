@@ -1,14 +1,10 @@
-<script>
+<script lang="ts" setup>
 import { NuxtLink } from "#components";
-
-export default {
-  // page properties go here
-};
 </script>
 
 <template>
   <NuxtLink to="/">Home</NuxtLink>
-  <h1 class="blue">privacy policy {{ name }}!</h1>
+  <h1 class="blue">privacy policy</h1>
 </template>
 
 <style>

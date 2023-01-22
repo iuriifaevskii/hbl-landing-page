@@ -1,34 +1,29 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-import type { PropType } from "vue";
+<script lang="ts" setup>
+import { defineProps, defineEmits } from "vue";
 import { ChackBoxValues } from "../types/checkbox";
+import type { Ref } from "vue";
 
-export default defineComponent({
-  name: "CheckBox",
-  props: {
-    values: {
-      type: Object as PropType<ChackBoxValues>,
-      required: true,
-    },
-  },
-  emits: ["updateChecked"],
-  methods: {
-    onChange(event: Event) {
-      this.checkedState = (event.target as HTMLInputElement).checked;
+interface Props {
+  values: ChackBoxValues;
+}
 
-      this.$emit("updateChecked", {
-        checked: this.checkedState,
-        value: this.values.value,
-        title: this.values.title,
-      });
-    },
-  },
-  data() {
-    return {
-      checkedState: this.values.checked,
-    };
-  },
-});
+const props = defineProps<Props>();
+
+const checkedState: Ref<boolean> = ref(props.values.checked);
+
+const emit = defineEmits<{
+  (e: "updateChecked", values: ChackBoxValues): void;
+}>();
+
+const onChange = (event: Event): void => {
+  checkedState.value = (event.target as HTMLInputElement).checked;
+
+  emit("updateChecked", {
+    checked: checkedState.value,
+    value: props.values.value,
+    title: props.values.title,
+  });
+};
 </script>
 
 <template>
