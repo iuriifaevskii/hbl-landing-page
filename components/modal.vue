@@ -10,11 +10,11 @@ const props = defineProps<Props>();
 const target = ref(null);
 
 const emit = defineEmits<{
-  (e: "setIsOpened", isOpened: boolean): void;
+  (e: "update:isOpened", isOpened: boolean): void;
 }>();
 
 const toggleModal = () => {
-  emit("setIsOpened", !props.isOpened);
+  emit("update:isOpened", !props.isOpened);
 };
 
 onClickOutside(target, (_event) => toggleModal());

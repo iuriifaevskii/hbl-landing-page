@@ -54,7 +54,7 @@ const { isOpened, setIsOpened } = useModal();
     </div>
     <Counter />
     <button @click="setIsOpened(true)">Open Modal</button>
-    <Modal :isOpened="isOpened" @setIsOpened="setIsOpened">
+    <Modal v-model:isOpened="isOpened">
       <template v-slot:header>Header</template>
       <template v-slot:body>Body</template>
       <template v-slot:footer>Footer</template>
